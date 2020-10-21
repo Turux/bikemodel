@@ -25,10 +25,6 @@ trk.Elevation=movmean(trk.Elevation,90);
 trk = incline(trk);
 trk.Time = trk.Distance./trk.Speed;
 
-%Plots a map of the route
-webmap
-wmline(trk)
-
 %Saves to workspace details about the route
 Elevation=range(trk.Elevation);
 Speed=mean(trk.Speed);
@@ -48,6 +44,10 @@ Hu=input('Humidity in %: ');
 SA=input('Area facing forward in m2: ');
 Crr=input('Coefficent of Rolling Resist: ');
 wr=input('Wheel radius in m: ');
+
+%Plots a map of the route
+webmap
+wmline(trk)
 
 %Prepares predictions
 DiPrampero=table;
@@ -158,4 +158,5 @@ xlabel('Average Estimated Power(W)')
 % legend('Rr','Ar','Gr','Ac','Wb','SEM')
 
 %Clears unused variables
-clearvars x er explode issues labels pd1 br newline
+clearvars x er explode issues labels pd1 br newline err errper filename ...
+    FileName PathName

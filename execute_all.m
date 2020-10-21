@@ -25,16 +25,6 @@ trk(issues)=[];
 trk = computeDistance(trk);
 trk = incline(trk);
 
-%Plots a map of the route
-webmap
-wmline(trk)
-
-%Plots route elevation 
-% figure
-% plot(trk.DistanceCumulative,movmedian(trk.Elevation,30))
-% xlabel('Cumulative Distance (m)')
-% ylabel('Elevation (m)')
-
 %Imports Speed Probability Density Function and predicts a speed profile
 load('SpeedPD.mat')
 speed=(random(speedPDF,[1,length(trk)]));
@@ -69,6 +59,16 @@ Hu=input('Humidity in %: ');
 SA=input('Area facing forward in m2: ');
 Crr=input('Coefficent of Rolling Resist: ');
 WheelRadius=input('Wheel radius in m: ');
+
+%Plots a map of the route
+webmap
+wmline(trk)
+
+%Plots route elevation 
+% figure
+% plot(trk.DistanceCumulative,movmedian(trk.Elevation,30))
+% xlabel('Cumulative Distance (m)')
+% ylabel('Elevation (m)')
 
 %Prepares predictions
 DiPrampero=table;
@@ -117,8 +117,9 @@ hold off
 xlabel('Average Estimated Power(W)')
 legend('Rr','Ar','Gr','Ac','Wb','SEM')
 
-%Clears unused variables from workspace
-clearvars x er explode labels pd1 br newline
-
 %Saves results
 save(fullfile(folder_save,'results.mat'))
+
+%Clears unused variables from workspace
+clearvars x er explode labels pd1 br newline folder_save issues speedPDF
+
